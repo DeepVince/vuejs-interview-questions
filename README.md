@@ -160,6 +160,7 @@ List of 300 VueJS Interview Questions
 |151| [What is mapState helper?](#what-is-mapstate-helper)|
 |152| [How do you combine local computed properties with mapState helper?](#how-do-you-combine-local-computed-properties-with-mapstate-helper)|
 |153| [Do you need to replace entire local state with vuex?](#do-you-need-to-replace-entire-local-state-with-vuex)|
+|154| [What are vuex getters?](#what-are-vuex-getters?)|
 
 1.  ### What is VueJS?
     **Vue.js** is an open-source, progressive Javascript framework for building user interfaces that aim to be incrementally adoptable. The core library of VueJS is focused on the `view layer` only, and is easy to pick up and integrate with other libraries or existing projects.
@@ -2820,3 +2821,23 @@ List of 300 VueJS Interview Questions
      ```
 153. ### Do you need to replace entire local state with vuex?
      No, if a piece of state strictly belongs to a single component, it could be just fine leaving it as local state. i.e, Eventhough vuex used in the application, it doesn't mean that you need to keep all the local state in vuex store. Other the code becomes more verbose and indirect although it makes your state mutations more explicit and debuggable.
+154. ### What are vuex getters??
+     Vuex getters acts as computed properties for stores to compute derived state based on store state. Similar to computed properties, a getter's result is cached based on its dependencies, and will only re-evaluate when some of its dependencies have changed.
+     Let's take a todo example which as completedTodos getter to find all completed todos,
+     ```javascript
+     const store = new Vuex.Store({
+       state: {
+         todos: [
+           { id: 1, text: 'Vue course', completed: true },
+           { id: 2, text: 'Vuex course', completed: false },
+           { id: 2, text: 'Vue Router course', completed: true }
+         ]
+       },
+       getters: {
+         completedTodos: state => {
+           return state.todos.filter(todo => todo.completed)
+         }
+       }
+     })
+     ```
+     **Note:**Getters receive state as first argument.
